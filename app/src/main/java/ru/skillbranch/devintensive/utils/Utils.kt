@@ -3,8 +3,8 @@ package ru.skillbranch.devintensive.utils
 object Utils {
 
     fun parseFullName(fullName: String?): Pair<String?, String?> {
-        val parts = fullName?.split(" ")
-        return parts?.get(0) to parts?.get(1)
+        val parts = fullName?.split(" ")?.filter { it.isNotBlank() }
+        return parts?.getOrNull(0) to parts?.getOrNull(1)
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? =
