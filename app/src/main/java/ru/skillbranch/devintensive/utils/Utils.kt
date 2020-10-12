@@ -47,13 +47,45 @@ object Utils {
             'ь' to "",
             'э' to "e",
             'ю' to "yu",
-            'я' to "ya"
+            'я' to "ya",
+            'А' to "A",
+            'Б' to "B",
+            'В' to "V",
+            'Г' to "G",
+            'Д' to "D",
+            'Е' to "E",
+            'Ё' to "E",
+            'Ж' to "Zh",
+            'З' to "Z",
+            'И' to "I",
+            'Й' to "I",
+            'К' to "K",
+            'Л' to "L",
+            'М' to "M",
+            'Н' to "N",
+            'О' to "O",
+            'П' to "P",
+            'Р' to "R",
+            'С' to "S",
+            'Т' to "T",
+            'У' to "U",
+            'Ф' to "F",
+            'Х' to "H",
+            'Ц' to "C",
+            'Ч' to "Ch",
+            'Ш' to "Sh",
+            'Щ' to "Sh'",
+            'Ъ' to "",
+            'Ы' to "I",
+            'Ь' to "",
+            'Э' to "E",
+            'Ю' to "Yu",
+            'Я' to "Ya"
         )
-        text.trim().replace("\\s+".toRegex(), divider)
         var result = ""
         for (ch in text) {
             result += tr.getOrElse(ch, {ch})
         }
-        return result
+        return result.trim().replace("\\s+".toRegex(), divider)
     }
 }
