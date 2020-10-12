@@ -11,13 +11,27 @@ abstract class BaseMessage (val id: String,
     abstract fun formatMessage(): String
 
     companion object Factory {
-        var id = 0
+        var id = -1
 
-        fun makeMessage(from: User, chat: Chat, date: Date, type: String, payload: String, isIncoming: Boolean = false) =
-            when (type) {
-                "text" -> TextMessage((++id).toString(), from, chat, payload)
-                "image" -> ImageMessage(id++.toString(), from, chat, payload)
+        fun makeMessage(from: User?, chat:Chat, date:Date = Date(), type:String = "text", payload:Any?): BaseMessage {
+            ++id;
+            return when (type) {
+                "text" -> TextMessage(
+                    id.toString(),
+                    from,
+                    chat,
+                    date = date,
+                    text = payload as String
+                )
+                "image" -> ImageMessage(
+                    id.toString(),
+                    from,
+                    chat,
+                    date = date,
+                    img = payload as String
+                )
                 else -> throw IllegalArgumentException(type)
             }
+        }
     }
 }
