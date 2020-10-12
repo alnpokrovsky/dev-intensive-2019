@@ -35,7 +35,7 @@ data class User (val id : String,
         fun lastVisit(lastVisit: Date) = apply { this.lastVisit = lastVisit }
         fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
 
-        fun Build(): User = makeUser(this)
+        fun build(): User = makeUser(this)
     }
 
     companion object Factory {
