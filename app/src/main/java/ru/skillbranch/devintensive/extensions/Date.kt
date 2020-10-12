@@ -18,7 +18,7 @@ enum class TimeUnits(val ms: Int, val russianCases: Array<String>) {
             value % 10 == 1L -> 1
             else -> 0
         }
-        return "${value.absoluteValue} ${this.russianCases[case]}"
+        return "$value ${this.russianCases[case]}"
     }
 
 }
@@ -28,7 +28,7 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
     return dateFormat.format(this)
 }
 
-fun Date.add(value: Int, units: TimeUnits): Date {
+fun Date.add(value: Long, units: TimeUnits): Date {
     this.time += value * units.ms
     return this
 }
@@ -40,7 +40,7 @@ val Int.hour get() = this * TimeUnits.HOUR.ms
 val Long.day get() = this * TimeUnits.DAY.ms
 
 fun Date.humanizeDiff(date: Date = Date()) =
-    when(val diff: Long = date.time - time) {
+    when(val diff: Long = date.time - this.time) {
         in 0..1.sec -> "только что"
         in 1.sec..45.sec -> "несколько секунд назад"
         in 45.sec..75.sec -> "минуту назад"
@@ -52,10 +52,10 @@ fun Date.humanizeDiff(date: Date = Date()) =
         in (-1).sec..0.sec -> "прямо сейчас"
         in (-45).sec..(-1).sec -> "через несколько секунд"
         in (-75).sec..(-45).sec -> "через минуту"
-        in (-45).min..(-75).sec -> "через ${TimeUnits.MINUTE.plural(diff/TimeUnits.MINUTE.ms)}"
+        in (-45).min..(-75).sec -> "через ${TimeUnits.MINUTE.plural(-diff/TimeUnits.MINUTE.ms)}"
         in (-75).min..(-45).min -> "через час"
-        in (-22).hour..(-75).min -> "через ${TimeUnits.HOUR.plural(diff/TimeUnits.HOUR.ms)}"
+        in (-22).hour..(-75).min -> "через ${TimeUnits.HOUR.plural(-diff/TimeUnits.HOUR.ms)}"
         in (-26).hour..(-22).hour -> "через день"
-        in (-360L).day..(-26).hour -> "через ${TimeUnits.DAY.plural(diff/TimeUnits.DAY.ms)}"
+        in (-360L).day..(-26).hour -> "через ${TimeUnits.DAY.plural(-diff/TimeUnits.DAY.ms)}"
         else -> if (diff > 0) "более года назад" else "более чем через год"
     }

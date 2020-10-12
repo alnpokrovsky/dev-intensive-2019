@@ -23,9 +23,8 @@ abstract class BaseMessage (val id: String,
         ): BaseMessage {
             ++id;
             return when (type) {
-                "text" -> TextMessage(id.toString(), from, chat, isIncoming, date, payload as String)
                 "image" -> ImageMessage(id.toString(), from, chat, isIncoming, date, payload as String)
-                else -> throw IllegalArgumentException(type)
+                else -> TextMessage(id.toString(), from, chat, isIncoming, date, payload as String)
             }
         }
     }
