@@ -29,7 +29,7 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
 }
 
 fun Date.add(value: Int, units: TimeUnits): Date {
-    this.time += units.ms
+    this.time += value * units.ms
     return this
 }
 

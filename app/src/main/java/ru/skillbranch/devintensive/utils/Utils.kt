@@ -11,7 +11,7 @@ object Utils {
         listOfNotNull(
             firstName?.firstOrNull { it != ' ' },
             lastName?.firstOrNull { it != ' ' }
-        ).takeIf { it.isNotEmpty() }?.joinToString("")
+        ).takeIf { it.isNotEmpty() }?.joinToString("")?.toUpperCase()
 
     fun  transliteration(text: String, divider: String = " "): String {
         val tr = mapOf<Char, String>(
